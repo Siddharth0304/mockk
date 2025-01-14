@@ -58,7 +58,7 @@ export default function AddDeviceModal() {
     };
     return (
       <>
-        <Button type="primary" onClick={showModal1} style={{height:'2.9rem',padding:'0 1rem',fontSize:'1rem',fontWeight:'600',marginLeft:'10px',fontFamily:'poppins',backgroundColor:'#0044CC',color:'#fbfbf2',border:'2px solid #20201e'}}>
+        <Button type="primary" onClick={showModal1} style={{height:'2.9rem',padding:'0 1rem',fontSize:'1rem',fontWeight:'600',marginLeft:'10px',fontFamily:'poppins',backgroundColor:'#578E7E',color:'#20201e',border:'2px solid #20201e'}}>
           Add Device
         </Button>
         <Modal

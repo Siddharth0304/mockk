@@ -6,7 +6,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 const titltStyle={
-    color:'black',fontWeight:'bold',fontSize:'1rem'
+    color:'black',
+    fontWeight:'bold',
+    fontSize:'1rem',
 }
 
 export default function AllDevices() {
@@ -65,21 +67,21 @@ export default function AllDevices() {
       const data = [
         {
           key: '1',
-          sno:'1',
+          sno:'1.',
           device: 'Sony Bravia',
           status: 'Online',
           schedule:'Schedule 34'
         },
         {
             key: '2',
-            sno:'2',
+            sno:'2.',
             device: 'Samsung Frame TV',
             status: 'Online',
             schedule:'Schedule 1'
         },
         {
             key: '3',
-            sno:'3',
+            sno:'3.',
             device: 'Toshiba New Sonic 4K',
             status: 'Offline',
             schedule:'Schedule 2'
@@ -102,7 +104,7 @@ export default function AllDevices() {
                             value={inp}
                             autoFocus={true}
                         > 
-                            <Input className="search-bar" style={{ height: '3rem', fontSize: '1.2rem', fontWeight: '500'}} placeholder="Search Device" prefix={inp ? <SearchOutlined /> : <SearchOutlined style={{color:'#BFBFBF'}}/>} />
+                            <Input className="search-bar"  style={{ height: '3rem', fontSize: '1.2rem', fontWeight: '500'}} placeholder="Search Device" prefix={inp ? <SearchOutlined /> : <SearchOutlined style={{color:'#BFBFBF'}}/>}/>
                         </AutoComplete>
                         <AddDeviceModal/>       
                     </form>

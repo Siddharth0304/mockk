@@ -38,7 +38,7 @@ export default function AddPolicyModal() {
     };
     return (
       <>
-        <Button type="primary" onClick={showModal} style={{height:'2.9rem',padding:'0 1rem',fontSize:'1rem',fontWeight:'500',marginLeft:'10px'}}>
+        <Button type="primary" onClick={showModal} style={{height:'2.9rem',padding:'0 1rem',fontSize:'1rem',fontWeight:'600',marginLeft:'10px',backgroundColor:'#578E7E',color:'#20201e',border:'2px solid #20201e'}}>
           Add Policy
         </Button>
         <Modal

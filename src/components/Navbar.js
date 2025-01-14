@@ -21,7 +21,7 @@ const siderStyle = {
   insetInlineStart: 0,
   top: 0,
   bottom: 0,
-  backgroundColor:'#fffaec',
+  backgroundColor:'#3d3d3d',
   padding: '0',
   margin: '0',
   border:''  
@@ -47,10 +47,10 @@ const Navbar = ({children}) => {
     <Layout hasSider>
       <Sider style={siderStyle}>
         <div className="demo-logo-vertical"><Image src={"/android-chrome-192x192.png"} width={30} height={30} alt=''></Image>ValueConnect</div><br/>
-        <Menu className='nav-menu' mode="inline" items={items} style={{border:'none',fontSize:'1rem',backgroundColor:'#fffaec',color:'#20201e'}}/>
-        <Menu className='nav-menu-bot' theme='light' mode="inline" style={{position: 'absolute',bottom: 0,border:'none',fontSize:'1rem',backgroundColor:'#fffaec',color:'#fbfbf2'}} items={bottomItems} />
+        <Menu className='nav-menu' mode="inline" items={items} style={{borderLeft:'2px solid #20201e',borderRight:'2px solid #20201e',fontSize:'1rem',backgroundColor:'#3d3d3d',color:'#F5ECD5'}}/>
+        <Menu className='nav-menu-bot' theme='light' mode="inline" style={{position: 'absolute',bottom: 0,border:'none',fontSize:'1rem',backgroundColor:'#3d3d3d',color:'#F5ECD5'}} items={bottomItems} />
       </Sider>
-      <Layout style={{marginInlineStart: 200,backgroundColor:'#FFFAEC'}}>
+      <Layout style={{marginInlineStart: 200,backgroundColor:'#F8FBFB'}}>
         <Content >
           {children}
         </Content>
