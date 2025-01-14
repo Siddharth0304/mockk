@@ -1,8 +1,7 @@
-import Build from "@/components/Build"
-import Image from "next/image"
+import AllPolicy from "@/components/AllPolicy"
 
 export default function page() {
   return (
-    <Build/>
+    <AllPolicy/>
   )
 }

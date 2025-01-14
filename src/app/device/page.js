@@ -1,7 +1,7 @@
-import Device from "@/components/Device"
+import AllDevices from "@/components/AllDevices";
 
-export default function page() {
-  return (
-    <Device/>
+export default function Devices(){
+  return(
+    <AllDevices/>
   )
 }

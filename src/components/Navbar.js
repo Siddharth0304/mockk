@@ -1,65 +1,61 @@
-'use client';
-import Link from "next/link"
+"use client";
+import Link from 'next/link';
+import {DesktopOutlined,FileOutlined,DashboardOutlined,PlayCircleOutlined,ReconciliationOutlined,CalendarOutlined,TagsOutlined,LogoutOutlined} from '@ant-design/icons';
+import { Layout, Menu, theme } from 'antd';
+import { useState } from 'react';
 import Image from 'next/image';
-import styled from "styled-components";
-import { usePathname } from "next/navigation";
+import Login from './Login';
 
-const NavLink=styled.div`
-  padding:20px;
-  text-align:center;
-  border:1px solid black;
-`;
-
-export default function Navbar() {
-  const pathname=usePathname();
-  return (
-    <div style={{height:'100vh'}}>
-      <div style={{backgroundColor:'white',padding:'10px',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center'}}>
-        <Link href={'/'} style={{textDecoration:'none',color:'black'}}>
-          <Image src="/android-chrome-192x192.png" alt="alt" width={30} height={30} /> 
-        </Link>
-        <p><b>Project K</b></p>
-      </div>
-      <NavLink style={{backgroundColor: pathname === '/dashboard' ? 'black' : 'white'}}>
-        <Link href={'/dashboard'} style={{textDecoration:'none',color:'black',color: pathname === '/dashboard' ? 'white' : 'black'}}>
-          Dashboard
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor: pathname === '/device' ? 'black' : 'white'}}>
-        <Link href={'/device'} style={{textDecoration:'none',color:'black',color: pathname === '/device' ? 'white' : 'black'}}>
-          Device
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor: pathname === '/media' ? 'black' : 'white'}}>
-        <Link href={'/media'} style={{textDecoration:'none',color:'black',color: pathname === '/media' ? 'white' : 'black'}}>
-          Media
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor: pathname === '/playlist' ? 'black' : 'white'}}>
-        <Link href={'/playlist'} style={{textDecoration:'none',color:'black',color: pathname === '/playlist' ? 'white' : 'black'}}>
-          Playlist
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor: pathname === '/schedules' ? 'black' : 'white'}}>
-        <Link href={'/schedules'} style={{textDecoration:'none',color:'black',color: pathname === '/schedules' ? 'white' : 'black'}}>
-          Schedules
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor: pathname === '/policy' ? 'black' : 'white'}}>
-        <Link href={'/policy'} style={{textDecoration:'none',color:'black',color: pathname === '/policy' ? 'white' : 'black'}}>
-          Policy
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor: pathname === '/tags' ? 'black' : 'white'}}>
-        <Link href={'/tags'} style={{textDecoration:'none',color:'black',color: pathname === '/tags' ? 'white' : 'black'}}>
-          Tags
-        </Link>
-      </NavLink>
-      <NavLink style={{backgroundColor:'orangered',color:pathname === '/logout' ? 'black' : 'white'}}>
-        <Link href={'/logout'} style={{textDecoration:'none',color:'black',color: pathname === '/logout' ? 'white' : 'black'}}>
-          Logout
-        </Link>
-      </NavLink>    
-    </div>
-  )
+const { Header, Content, Footer, Sider } = Layout;
+function getItem(label, key, icon, href) {
+  return {
+    key,
+    icon,
+    label: href ? (<Link href={href}>{label}</Link>):(label)
+  };
 }
+const siderStyle = {
+  overflow: 'auto',
+  height: '100vh',
+  position: 'fixed',
+  insetInlineStart: 0,
+  top: 0,
+  bottom: 0,
+  backgroundColor:'#fffaec',
+  padding: '0',
+  margin: '0',
+  border:''  
+};
+const items = [
+  getItem('Dashboard', '1', <DashboardOutlined />,'/dashboard'),
+  getItem('Device', '2', <DesktopOutlined />,'/device'),
+  getItem('Media', '3', <PlayCircleOutlined />,'/media'),
+  getItem('Playlists', '4', <FileOutlined />,'/playlist'),
+  getItem('Policy', '5', <ReconciliationOutlined />,'/policy'),
+  getItem('Schedules', '6', <CalendarOutlined />,'/schedules'),
+  getItem('Tags', '7', <TagsOutlined />,'/tags'),
+];
+
+const bottomItems = [
+  getItem('Logout', '8', <LogoutOutlined />, '/login'),
+];
+
+const Navbar = ({children}) => {
+  const [collapsed, setCollapsed] = useState(false);
+  
+  return (
+    <Layout hasSider>
+      <Sider style={siderStyle}>
+        <div className="demo-logo-vertical"><Image src={"/android-chrome-192x192.png"} width={30} height={30} alt=''></Image>ValueConnect</div><br/>
+        <Menu className='nav-menu' mode="inline" items={items} style={{border:'none',fontSize:'1rem',backgroundColor:'#fffaec',color:'#20201e'}}/>
+        <Menu className='nav-menu-bot' theme='light' mode="inline" style={{position: 'absolute',bottom: 0,border:'none',fontSize:'1rem',backgroundColor:'#fffaec',color:'#fbfbf2'}} items={bottomItems} />
+      </Sider>
+      <Layout style={{marginInlineStart: 200,backgroundColor:'#FFFAEC'}}>
+        <Content >
+          {children}
+        </Content>
+      </Layout>
+    </Layout>
+  );
+};
+export default Navbar;
