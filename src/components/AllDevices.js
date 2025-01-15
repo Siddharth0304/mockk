@@ -1,14 +1,14 @@
 "use client";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined,CheckCircleTwoTone,CloseCircleTwoTone } from "@ant-design/icons";
 import {AutoComplete ,Button,Input,Table,Space,Tag} from "antd";
 import AddDeviceModal from "./AddDeviceModal";
 import Link from "next/link";
 import { useState } from "react";
+import '../app/ui/AllDisplay.css';
 
 const titltStyle={
     color:'black',
-    fontWeight:'bold',
-    fontSize:'1rem',
+    fontSize:'1.3rem',
 }
 
 export default function AllDevices() {
@@ -43,7 +43,7 @@ export default function AllDevices() {
 
     const columns = [
         {
-            title: <span style={titltStyle}>S.NO</span>,
+            title: <span style={titltStyle}>S.No</span>,
             dataIndex: 'sno',
             key: 'sno',
         },
@@ -51,12 +51,13 @@ export default function AllDevices() {
           title: <span style={titltStyle}>Device</span>,
           dataIndex: 'device',
           key: 'device',
-          render: (text) => <Link href={'/device/currentdevice'} style={{color:'black'}}>{text}</Link>,
+          render: (text) => <Link href={'/device/currentdevice'} style={{color:'black'}} className="device-link">{text}</Link>,
         },
         {
           title: <span style={titltStyle}>Status</span>,
           dataIndex: 'status',
           key: 'status',
+          render : (text)=><span>{text} {text==='Online'? <CheckCircleTwoTone twoToneColor="#60A563"/> : <CloseCircleTwoTone twoToneColor="#BC1823"/>} </span>
         },
         {
           title: <span style={titltStyle}>Schedule</span>,
@@ -90,19 +91,18 @@ export default function AllDevices() {
     
     return (
         <div>
-            <br/>
             <h1 style={{textAlign:'center'}}>All Devices</h1>
             <div style={{padding:'2%'}}>
                 <div>
                     <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}> {/* Prevent default form submission */}
                         <AutoComplete
-                            style={{ width:'90%',height:'3rem',fontSize:'2rem',fontWeight:'500'}}
+                            style={{ width:'90%',height:'3rem',fontSize:'2rem',fontWeight:'600'}}
                             options={options} // Use options based on input value
                             onSearch={handleInput} // Update input value on search
                             onSelect={handleSelect} // Update input value on selection
                             filterOption={true} 
                             value={inp}
-                            autoFocus={true}
+                            className="auto-complete"
                         > 
                             <Input className="search-bar"  style={{ height: '3rem', fontSize: '1.2rem', fontWeight: '500'}} placeholder="Search Device" prefix={inp ? <SearchOutlined /> : <SearchOutlined style={{color:'#BFBFBF'}}/>}/>
                         </AutoComplete>

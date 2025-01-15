@@ -1,7 +1,9 @@
 "use client";
 import { useState } from 'react';
 import { Button, Modal,Form,Input,Space,InputNumber,Select,Tooltip,Checkbox,Switch,Slider,TimePicker } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined,PlusCircleTwoTone, PlusCircleOutlined } from '@ant-design/icons';
+import '../app/ui/AddModal.css'
+import '../app/ui/AddDeviceModal.css';
 import dayjs from 'dayjs';
 const format = 'HH:mm:ss';
 
@@ -58,8 +60,8 @@ export default function AddDeviceModal() {
     };
     return (
       <>
-        <Button type="primary" onClick={showModal1} style={{height:'2.9rem',padding:'0 1rem',fontSize:'1rem',fontWeight:'600',marginLeft:'10px',fontFamily:'poppins',backgroundColor:'#578E7E',color:'#20201e',border:'2px solid #20201e'}}>
-          Add Device
+        <Button type="primary" onClick={showModal1} className='add-button'>
+          Add Device <PlusCircleOutlined />
         </Button>
         <Modal
           title="Registration Code"
@@ -67,6 +69,24 @@ export default function AddDeviceModal() {
           onOk={handleOk1}
           confirmLoading={confirmLoading1}
           onCancel={handleCancel1}
+          okText={"Add Device"}
+            okButtonProps={{
+                style: { 
+                  backgroundColor: '#578f7e', 
+                  border: '2px solid #578e7e', 
+                  color: '#fffaec', 
+                  fontWeight: '600'
+                }
+                
+            }}
+            cancelButtonProps={{
+              style:{
+                backgroundColor:'#BC1823',
+                color:'#fffaec',
+                fontWeight: '600',
+                border:'2px solid #fffaec'
+              }
+            }}
         >
             <div>
                 <div style={{fontFamily:'poppins'}}>
@@ -100,7 +120,7 @@ export default function AddDeviceModal() {
           >
             <Form.Item
               
-              label="Device Name"
+              label={<span className='single-device-form-item'>Device Name</span>}
               name="device_name"
               rules={[
                 {
@@ -112,7 +132,7 @@ export default function AddDeviceModal() {
               <Input placeholder="Device Name"/>
             </Form.Item>
             <Form.Item
-                label="Location coordinates"
+                label={<span className='single-device-form-item'>Location Coordinates</span>}
                 name="coordinates"
                 rules={[{ required: true, message: 'Please enter the coordinates!' }]}
             >
@@ -130,12 +150,12 @@ export default function AddDeviceModal() {
                       noStyle
                       rules={[{ required: true, message: 'Please enter the longitude!' }]}
                   >
-                      <InputNumber placeholder="Longitude" />
+                      <InputNumber placeholder="Longitude" style={{width:'58%'}}/>
                   </Form.Item>
               </Space>
             </Form.Item>
             <div style={{display:'flex',alignItems:'start'}}>
-              <Form.Item label="Device Tag" name="tag" rules={[{ required: true, message: 'Please select a tag!' }]}>
+              <Form.Item label={<span className='single-device-form-item'>Device Tag</span>} name="tag" rules={[{ required: true, message: 'Please select a tag!' }]}>
                 <Select style={{width:300}} placeholder='Device Tag'>
                   <Select.Option value="360">360</Select.Option>
                   <Select.Option value="480">480</Select.Option>
@@ -145,11 +165,11 @@ export default function AddDeviceModal() {
                 </Select>
               </Form.Item>&nbsp;&nbsp;
               <Tooltip title="Add New Tag">
-                <Button type="primary" shape="circle" icon={<PlusOutlined />} size='default'/>
+                <Button type="primary" shape="circle" icon={<PlusOutlined />} size='default' className='plus-button'/>
               </Tooltip>
             </div>
             <div style={{display:'flex',alignItems:'start'}}>
-              <Form.Item label="Device Policy" name="policy" rules={[{ required: true, message: 'Please select a policy!' }]}>
+              <Form.Item label={<span className='single-device-form-item'>Device Policy</span>} name="policy" rules={[{ required: true, message: 'Please select a policy!' }]}>
                 <Select style={{width:300}} placeholder='Device Policy'>
                   <Select.Option value=""></Select.Option>
                   <Select.Option value="360">360</Select.Option>
@@ -161,34 +181,34 @@ export default function AddDeviceModal() {
               </Form.Item>
               &nbsp;&nbsp;
               <Tooltip title="Add New Policy">
-                <Button type="primary" shape="circle" icon={<PlusOutlined />} size='default'/>
+                <Button type="primary" shape="circle" icon={<PlusOutlined />} size='default' className='plus-button'/>
               </Tooltip>
             </div>
             
             <Checkbox checked={componentDisabled} onChange={(e) => setComponentDisabled(e.target.checked)}>
-              Modify Policy For This Device
+              {<span className='single-device-form-item'>Modify Policy For This Device</span>}
             </Checkbox>
             <div style={{display:componentDisabled==false?'none':'',pointerEvents: !componentDisabled ? 'none' : 'auto', opacity: !componentDisabled ? 0.5 : 1,}}>
               <br/>
-                <Form.Item label="Kiosk Mode" valuePropName="checked" name='kiosk'>
+                <Form.Item label={<span className='single-device-form-item'>Kiosk Mode</span>} valuePropName="checked" name='kiosk'>
                     <Switch/>
                   </Form.Item>
-                  <Form.Item label="Enable ADB" valuePropName="checked" name='adb'>
+                  <Form.Item label={<span className='single-device-form-item'>Enable ADB</span>} valuePropName="checked" name='adb'>
                     <Switch />
                   </Form.Item>
-                  <Form.Item label="Brightness" style={{width:'60%'}} name='brightness'>
+                  <Form.Item label={<span className='single-device-form-item'>Brightness</span>} style={{width:'60%'}} name='brightness'>
                     <Slider step={10} />
                   </Form.Item>
-                  <Form.Item label="Volume" style={{width:'60%'}} name='volume'>
+                  <Form.Item label={<span className='single-device-form-item'>Volume</span>} style={{width:'60%'}} name='volume'>
                     <Slider step={10}/>
                   </Form.Item>
-                  <Form.Item label="Recieve OTA Updates" valuePropName="checked" name='ota'>
+                  <Form.Item label={<span className='single-device-form-item'>Recieve OTA Updates</span>} valuePropName="checked" name='ota'>
                     <Switch />
                   </Form.Item>
-                  <Form.Item label="Device Uptime" valuePropName="checked" name='uptime'>
+                  <Form.Item label={<span className='single-device-form-item'>Device Uptime</span>} valuePropName="checked" name='uptime'>
                     <TimePicker.RangePicker format={format} /> 
                   </Form.Item>
-                  <Form.Item label="Video Resolution" style={{width:'60%'}} name='resolution'>
+                  <Form.Item label={<span className='single-device-form-item'>Video Resolution</span>} style={{width:'60%'}} name='resolution'>
                     <Select>
                       <Select.Option value=""></Select.Option>
                       <Select.Option value="360">360</Select.Option>
@@ -198,7 +218,7 @@ export default function AddDeviceModal() {
                       <Select.Option value="4K">4K</Select.Option>
                     </Select>
                   </Form.Item>
-                  <Form.Item label="Geolocation Lockdown" valuePropName="checked" name='location'>
+                  <Form.Item label={<span className='single-device-form-item'>Geolocation Lockdown</span>} valuePropName="checked" name='location'>
                     <Switch />
                   </Form.Item>
             </div>

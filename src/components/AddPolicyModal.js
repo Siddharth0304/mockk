@@ -1,7 +1,8 @@
 "use client";
 import { useState } from 'react';
 import { Button, Modal,Form,Input,Space,InputNumber,Select,Tooltip,Checkbox,Switch,Slider,TimePicker } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import '../app/ui/AddModal.css';
 import dayjs from 'dayjs';
 const format = 'HH:mm:ss';
 
@@ -38,8 +39,8 @@ export default function AddPolicyModal() {
     };
     return (
       <>
-        <Button type="primary" onClick={showModal} style={{height:'2.9rem',padding:'0 1rem',fontSize:'1rem',fontWeight:'600',marginLeft:'10px',backgroundColor:'#578E7E',color:'#20201e',border:'2px solid #20201e'}}>
-          Add Policy
+        <Button type="primary" onClick={showModal} className='add-button'>
+          Add Policy <PlusCircleOutlined />
         </Button>
         <Modal
           title="Add New Policy"

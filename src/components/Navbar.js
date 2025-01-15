@@ -5,6 +5,7 @@ import { Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
 import Image from 'next/image';
 import Login from './Login';
+import '../app/ui/Navbar.css'
 
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, href) {
@@ -46,9 +47,12 @@ const Navbar = ({children}) => {
   return (
     <Layout hasSider>
       <Sider style={siderStyle}>
-        <div className="demo-logo-vertical"><Image src={"/android-chrome-192x192.png"} width={30} height={30} alt=''></Image>ValueConnect</div><br/>
-        <Menu className='nav-menu' mode="inline" items={items} style={{borderLeft:'2px solid #20201e',borderRight:'2px solid #20201e',fontSize:'1rem',backgroundColor:'#3d3d3d',color:'#F5ECD5'}}/>
-        <Menu className='nav-menu-bot' theme='light' mode="inline" style={{position: 'absolute',bottom: 0,border:'none',fontSize:'1rem',backgroundColor:'#3d3d3d',color:'#F5ECD5'}} items={bottomItems} />
+        <div className="demo-logo-vertical">
+          <Image src={"/android-chrome-192x192.png"} width={30} height={30} alt=''></Image>
+          <div style={{marginLeft:'2%'}}>ValueConnect</div>
+        </div>
+        <Menu className='nav-menu' mode="inline" items={items} />
+        <Menu className='nav-menu-bot' theme='light' mode="inline" items={bottomItems} />
       </Sider>
       <Layout style={{marginInlineStart: 200,backgroundColor:'#F8FBFB'}}>
         <Content >

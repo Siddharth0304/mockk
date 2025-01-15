@@ -4,9 +4,13 @@ import {AutoComplete ,Button,Input,Table,Space,Tag} from "antd";
 import AddPolicyModal from "./AddPolicyModal";
 import Link from "next/link";
 import { useState } from "react";
+import '../app/ui/AllDisplay.css';
+import EditPolicyModal from "./EditPolicyModal";
+import DeletePolicyModal from "./DeletePolicyModal";
 
 const titltStyle={
-    color:'black',fontWeight:'bold',fontSize:'1rem'
+    color:'black',
+    fontSize:'1.3rem'
 }
 
 export default function AllPolicy() {
@@ -49,38 +53,30 @@ export default function AllPolicy() {
           key: 'policy',
           render: (text) => <Link href={'/policy/currentpolicy'} style={{color:'black'}}>{text}</Link>,
         },
-        // {
-        //   title: 'Status',
-        //   dataIndex: 'status',
-        //   key: 'status',
-        // },
-        // {
-        //   title: 'Schedule',
-        //   dataIndex: 'schedule',
-        //   key: 'schedule',
-        // },
+        {
+          title: <span style={titltStyle}>Action</span>,
+          dataIndex: 'action',
+          key: 'action',
+        }
       ];
       const data = [
         {
           key: '1',
-          sno:'1',
+          sno:'1.',
           policy: 'Sony Bravia',
-        //   status: 'Online',
-        //   schedule:'Schedule 34'
+          action :<span><EditPolicyModal/> <DeletePolicyModal/></span>
         },
         {
             key: '2',
-            sno:'2',
+            sno:'2.',
             policy: 'Samsung Frame TV',
-            // status: 'Online',
-            // schedule:'Schedule 1'
+            action :<span><EditPolicyModal/> <DeletePolicyModal/></span>
         },
         {
             key: '3',
-            sno:'3',
+            sno:'3.',
             policy: 'Toshiba New Sonic 4K',
-            // status: 'Offline',
-            // schedule:'Schedule 2'
+            action :<span><EditPolicyModal/> <DeletePolicyModal/></span>
         },
       ];
     
@@ -97,7 +93,6 @@ export default function AllPolicy() {
                         onSelect={handleSelect} // Update input value on selection
                         filterOption={true} 
                         value={inp}
-                        autoFocus={true}
                     > 
                         <Input className="search-bar" style={{ height: '3rem', fontSize: '1.2rem', fontWeight: '500' }} placeholder="Search Policy" prefix={inp ? <SearchOutlined /> : <SearchOutlined style={{color:'#BFBFBF'}}/>} />
                     </AutoComplete>
