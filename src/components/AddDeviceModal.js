@@ -64,7 +64,7 @@ export default function AddDeviceModal() {
           Add Device <PlusCircleOutlined />
         </Button>
         <Modal
-          title="Registration Code"
+          title={<span style={{fontSize:'1.2rem',color:'#20201e'}}>Register Your Device</span>}
           open={open1}
           onOk={handleOk1}
           confirmLoading={confirmLoading1}
@@ -84,22 +84,21 @@ export default function AddDeviceModal() {
                 backgroundColor:'#BC1823',
                 color:'#fffaec',
                 fontWeight: '600',
-                border:'2px solid #fffaec'
+                border:'2px solid #BC1823'
               }
             }}
         >
             <div>
-                <div style={{fontFamily:'poppins'}}>
-                    <h3>Steps To Register :</h3>
-                    1. Enter the 9-digit registration code displayed on your device. <br/>
-                    2. The device registration code will only be valid for 5 minutes. <br/>
-                    3. After 5 minutes the registration code will be refreshed. <br/>
-                </div>
+                <ul style={{fontFamily:'poppins',fontSize:'1rem',paddingLeft:'5%'}}>
+                    <li>Enter the 9-digit registration code displayed on your device.</li>
+                    <li>The device registration code will only be valid for 5 minutes.</li> 
+                    <li>After 5 minutes the registration code will be refreshed.</li>
+                </ul>
             </div>
-            <br/><br/>
+            <br/>
             <Form>
-                <Form.Item label="Enter Registration Code" name="reg_code" rules={[{required: true,message: 'Please enter the code!',},]} style={{fontWeight:'500'}}>
-                    <Input />
+                <Form.Item label={<span className='single-device-form-item'>Enter Registration Code</span>} name="reg_code" rules={[{required: true,message: 'Please enter the code!',},]} style={{fontWeight:'500'}}>
+                    <Input placeholder='XXXXXXXXX'/>
                 </Form.Item>
             </Form>
         </Modal>

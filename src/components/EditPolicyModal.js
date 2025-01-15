@@ -1,8 +1,27 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Form, InputNumber, Input} from 'antd';
+import { Button, Modal, Form, InputNumber, Input,Switch,Slider,Checkbox,TimePicker,Select} from 'antd';
+import dayjs from 'dayjs';
+import styled from 'styled-components';
+import { EditTwoTone } from '@ant-design/icons';
+const format = 'HH:mm:ss';
+
+const EditButton=styled(Button)`
+  background: rgb(87,142,126);
+  background: linear-gradient(45deg, rgba(87,142,126,1) 0%, rgba(255,250,236,1) 100%);
+  border:2px solid #20201e !important;
+  font-size:1.1rem !important;
+  &:hover{
+    background: rgb(87,142,126) !important;
+    background: linear-gradient(45deg, rgba(87,142,126,1) 0%, rgba(255,250,236,1) 100%) !important;
+    color:#20201e !important;
+    border:2px solid #20201e !important;
+  }
+`;
 
 const EditPolicyModal = ({details,st}) => {
+  const startTime = dayjs('12:08:23', 'h:mm:ss');
+  const endTime = dayjs('12:08:23', 'h:mm:ss');
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [form] = Form.useForm(); 
@@ -52,133 +71,71 @@ const EditPolicyModal = ({details,st}) => {
 
   return (
     <>
-        <Button onClick={showModal}>
-        Edit Policy
-        </Button>
+        <EditButton onClick={showModal}  className='edit-policy'>
+        Edit <EditTwoTone twoToneColor={'#587e7e'}/>
+        </EditButton>
         <Modal
-            title="Add New Review"
+            title={<span style={{fontSize:'1.2rem',color:'#20201e'}}>Edit Device Policy</span>}
             open={open}
             onOk={handleOk}
             confirmLoading={confirmLoading}
             onCancel={handleCancel}
             centered
             okText={"Edit"}
-            okButtonProps={{
+          okButtonProps={{
                 style: { 
-                  backgroundColor: '#ff4040', 
-                  border: '2px solid #ff4040', 
-                  color: 'black', 
-                  fontWeight: 'bold'
+                  backgroundColor: '#578f7e', 
+                  border: '2px solid #578e7e', 
+                  color: '#fffaec', 
+                  fontWeight: '600'
                 }
                 
             }}
             cancelButtonProps={{
               style:{
-                color:'black',
-                borderColor:'black'
+                backgroundColor:'#BC1823',
+                color:'#fffaec',
+                fontWeight: '600',
+                border:'2px solid #BC1823'
               }
             }}
         >
-            <Form
-            form={form} 
-            layout="vertical" 
-            name={`addReviewForm}`}
-            initialValues={{ remember: true }} // Set initial form values
-            >
-
-            <Form.Item
-                label="First Name"
-                name="firstName"
-                rules={[{ required: true,message:'Please input the first name!'}]}
-                // initialValue={details.firstName}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter First Name" />
-            </Form.Item>
-
-            <Form.Item
-                label="Last Name"
-                name="lastName"
-                rules={[{ required: true,message:'Please input the last name!'}]}
-                // initialValue={details.lastName}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Last Name" />
-            </Form.Item>
-            
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true,message:'Please input the username!'}]}
-                // initialValue={details.username}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Username" />
-            </Form.Item>
-
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true,message:'Please input the password!'},{
-                  pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-                  message: 'Password must be at least 6 characters long, contain at least one letter, one number, and one special character!',
-                }]}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Password" />
-            </Form.Item>
-
-            <Form.Item
-                label="Email"
-                name="email"
-                rules={[{ required: true,message:'Please input the email!'},{ type: 'email', message: 'Please enter a valid email address!' }]}
-                // initialValue={details.email}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Email" />
-            </Form.Item>
-
-            <Form.Item
-                label="Phone"
-                name="phone"
-                rules={[{ required: true,message:'Please input the phone number!'},{ 
-                  pattern: /^[0-9]{10}$/, 
-                  message: 'Please enter a valid 10-digit phone number!' 
-                }]}
-                // initialValue={details.phone}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Phone Number" />
-            </Form.Item>
-
-            <Form.Item
-                label="About Me"
-                name="aboutYourself"
-                rules={[{ required: true,message:'Please input about yourself!'}]}
-                // initialValue={details.aboutYourself}
-            >
-                <Input.TextArea style={{ width: '100%' }} placeholder="Enter About Yourself" />
-            </Form.Item>
-
-            <Form.Item
-                label="LinkedIn"
-                name="linkedIn"
-                // initialValue={details.linkedIn?details.linkedIn:""}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter LinkedIn URL" />
-            </Form.Item>
-
-            <Form.Item
-                label="Instagram"
-                name="instagram"
-                // initialValue={details.instagram?details.instagram:""}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Instagram URL" />
-            </Form.Item>
-
-            <Form.Item
-                label="Twitter"
-                name="twitter"
-                // initialValue={details.twitter?details.twitter:""}
-            >
-                <Input style={{ width: '100%' }} placeholder="Enter Twitter URL" />
-            </Form.Item>
-
-            </Form>
+            <br/>
+            <Form name="basic" form={form} autoComplete="off">
+                  <Form.Item label={<span className='single-device-form-item'>Policy Name</span>} valuePropName="checked" name='policy_name' rules={[{ required: true, message: 'Please enter policy name!' }]}>
+                    <Input placeholder='Enter Policy Name'/>
+                  </Form.Item>
+                <Form.Item label={<span className='single-device-form-item'>Kiosk Mode</span>} valuePropName="checked" name='kiosk'>
+                    <Switch/>
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Enable ADB</span>} valuePropName="checked" name='adb'>
+                    <Switch />
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Brightness</span>} style={{width:'60%'}} name='brightness'>
+                    <Slider step={10} />
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Volume</span>} style={{width:'60%'}} name='volume'>
+                    <Slider step={10}/>
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Recieve OTA Updates</span>} valuePropName="checked" name='ota'> 
+                    <Switch />
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Device Uptime</span>} valuePropName="checked" name='uptime' rules={[{ required: true, message: 'Please schedule the uptime!' }]}>
+                    <TimePicker.RangePicker format={format} /> 
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Video Resolution</span>} style={{width:'60%'}} name='resolution' rules={[{ required: true, message: 'Please select resolution!' }]}>
+                    <Select placeholder="Select Video Resolution">
+                      <Select.Option value="360">360</Select.Option>
+                      <Select.Option value="480">480</Select.Option>
+                      <Select.Option value="720">720</Select.Option>
+                      <Select.Option value="1080">1080</Select.Option>
+                      <Select.Option value="4K">4K</Select.Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item label={<span className='single-device-form-item'>Geolocation Lockdown</span>} valuePropName="checked" name='location'>
+                    <Switch />
+                  </Form.Item>
+        </Form>
         </Modal>
     </>
   );

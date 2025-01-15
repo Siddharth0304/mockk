@@ -1,6 +1,21 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form, InputNumber, Input} from 'antd';
+import { DeleteTwoTone } from '@ant-design/icons';
+import styled from 'styled-components';
+
+const DeleteButton=styled(Button)`
+  background: rgb(188,24,35);
+background: linear-gradient(45deg, rgba(188,24,35,1) 0%, rgba(255,250,236,1) 100%);
+  border:2px solid #20201e !important;
+  font-size:1.1rem !important;
+  &:hover{
+    background: rgb(188,24,35) !important;
+    background: linear-gradient(45deg, rgba(188,24,35,1) 0%, rgba(255,250,236,1) 100%) !important;
+    color:#20201e !important;
+    border:2px solid #20201e !important;
+  }
+`;
 
 const DeletePolicyModal = ({id,st}) => {
   const [open, setOpen] = useState(false);
@@ -62,11 +77,11 @@ const DeletePolicyModal = ({id,st}) => {
 
   return (
     <>
-        <Button onClick={showModal}>
-        Delete Profile
-        </Button>
+        <DeleteButton onClick={showModal} className='delete-policy'>
+        Delete <DeleteTwoTone twoToneColor={'#bc1823'}/>
+        </DeleteButton>
         <Modal
-            title="Delete Profile"
+            title={<span style={{fontSize:'1.2rem',color:'#20201e'}}>Delete Device Policy</span>}
             open={open}
             onOk={handleOk}
             confirmLoading={confirmLoading}
@@ -75,20 +90,22 @@ const DeletePolicyModal = ({id,st}) => {
             width={700}
             okText="Delete"
             okButtonProps={{
-                style: { 
-                  backgroundColor: '#ff4040', 
-                  border: '2px solid #ff4040', 
-                  color: 'black', 
-                  fontWeight: 'bold',
-                }
-                
-            }}
-            cancelButtonProps={{
-              style:{
-                color:'black',
-                borderColor:'black'
+              style: { 
+                backgroundColor: '#578f7e', 
+                border: '2px solid #578e7e', 
+                color: '#fffaec', 
+                fontWeight: '600'
               }
-            }}
+              
+          }}
+          cancelButtonProps={{
+            style:{
+              backgroundColor:'#BC1823',
+              color:'#fffaec',
+              fontWeight: '600',
+              border:'2px solid #BC1823'
+            }
+          }}
         >
             <Form form={form}> 
                 <p>Are you sure to delete the policy?</p>
